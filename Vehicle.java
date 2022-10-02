@@ -5,6 +5,8 @@ public class Vehicle {
 	int length;
 	boolean isVertical;
 	
+	
+	// Constructor
 	public Vehicle(VehicleType type, int startRow, int startCol, int length, boolean isVertical) {
 		this.type = type;
 		start = new Space(startRow, startCol);
@@ -12,39 +14,49 @@ public class Vehicle {
 		this.isVertical = isVertical;
 	}
 	
+	// returns vehicle start space
 	public Space getStart() {
 		return this.start;
 	}
 	
+	// returns start row
+	public int getStartRow() {
+		return this.start.getRow();
+	}
 	
+	// returns start col
+	public int getStartCol() {
+		return this.start.getCol();
+	}
+	
+	// returns length of the vehicle
+	public int getLength() {
+		return this.length;
+	}
+	
+	// returns true if vehicle is vertical
+	public boolean isVertical() {
+		return this.isVertical;
+	}
+	
+	// sets the start row for the vehicle
 	public void setStartRow(int newRow) {
 		this.start.setRow(newRow);
 	}
 	
+	// sets the start col for the vehicle
 	public void setStartCol(int newCol) {
 		this.start.setCol(newCol);
 	}
-	
-	// TODO You'll need to fill in this entire file
 
-	/**
-	 * @return the type associated with this particular vehicle
-	 */
+	// returns the type associated with the particular vehicle
 	public VehicleType getVehicleType() {
-		// TODO change this implementation so that you return the vehicles
-		// actual type, which should be stored in a variable
-		// . Right now it only returns the type mycar
 		return this.type;
 	}
 
-	/**
-	 * Provides an array of Spaces that indicate where a particular Vehicle
-	 * would be located, based on its current starting space
-	 * 
-	 * @return the array of Spaces occupied by that particular Vehicles
-	 */
+	// Provides an array of Spaces that indicate where a particular Vehicle
+	// would be located, based on its current starting space
 	public Space[] spacesOccupied() {
-		// TODO change this implementation so that you return the correct spaces
 		
 		Space[] spaceArray;
 		if (this.length == 2) {
@@ -70,16 +82,9 @@ public class Vehicle {
 		return spaceArray;
 	}
 
-	/**
-	 * Calculates an array of the spaces that would be travelled if a vehicle
-	 * were to move numSpaces
-	 * 
-	 * @param numSpaces
-	 *            The number of spaces to move (can be negative or positive)
-	 * @return The array of Spaces that would need to be checked for Vehicles
-	 */
+	// Calculates an array of the spaces that would be traveled if a vehicle
+	// were to move numSpaces
 	public Space[] spacesOccupiedOnTrail(int numSpaces) {
-		// TODO change this implementation so that you return the correct space
 		Space[] spacesOccupied;
 		spacesOccupied = new Space[Math.abs(numSpaces)];
 		
@@ -123,6 +128,8 @@ public class Vehicle {
 		return spacesOccupied;
 	}
 	
+	
+	// moves the vehicle to a new location by changing its start space
 	public void move(int numSpaces) {
 		if (this.isVertical) {
 			setStartRow(this.start.getRow() + numSpaces);
@@ -132,6 +139,7 @@ public class Vehicle {
 		}
 	}
 	
+	// Returns the start space a vehicle would occupy if it would move
 	public Space ifIWereToMove(int numSpaces) {
 		Space newSpace;
 		if (this.isVertical) {

@@ -25,12 +25,21 @@ public class ConsoleGame {
 	}
 	
 	public void playGame() {
-		/* TODO: This is the only method you'll need to fill in, which should be the loop that 
-		 * continually asks the user for a location and a number and then tries to move that location by
-		 * that many spaces.  The following line just prints out one version of the grid (once you have the board up
-		 * and running, this should print something out that is more significant)
-		 */
-		System.out.println(level);  //use this line to print out the current level with the header row information
+		 // loop that continually asks the user for a location and a number and then tries to move that location by
+		 // that many spaces.  The following line just prints out one version of the grid
+		 
+		System.out.println(level);  //prints out the current level with the header row information
+		while (level.passedLevel() == false) {
+			System.out.println("What's you next move?  (Moves so far: " + level.getNumMoves() + ")");
+			Space VehicleSpace = getLocationFromUser(NUM_ROWS,NUM_COLS);
+			int numSpaces = getInteger("How many spaces would you like this vehicle to move?");
+			if (level.moveNumSpaces(VehicleSpace, numSpaces) == false) {
+				System.out.println("Sorry but that vehicle can't be moved to where you want, please try again");
+			}
+			System.out.println(level);
+		}
+		System.out.println("\nCongratulations you won!");
+		System.out.println("Level won in " + level.getNumMoves() + " moves");
 	}
 
 	/**
@@ -39,9 +48,7 @@ public class ConsoleGame {
 	 * In the unprecedented event that the platform's IO
 	 * system gets out of whack, the method will terminated whatever application called it.
 	 * No unchecked exceptions are ever thrown.
-	 *
-	 * @return the RowCol that represents the user's response (e.g. "A1" would be row=0, col=0)
-	 */     
+	 */
 	private final static BufferedReader CONSOLE_READER = new BufferedReader(new InputStreamReader(System.in));
 	public static Space getLocationFromUser(int maxRows, int maxCols) {
 		try {
@@ -64,9 +71,6 @@ public class ConsoleGame {
 	/**
 	 * waits to for the user to input a number, similar to cin &gt;&gt; num in c++, with the custom message
 	 * that prompts the user for a number given beforehand.
-	 * 
-	 * @param message the message to print before waiting for the number
-	 * @return the integer the user inputs
 	 */
 	
 	public static int getInteger(String message) {
@@ -85,25 +89,14 @@ public class ConsoleGame {
 		}
 	}
 
-	/**
-	 * This helper method is used by getLocation to ensure that location entered is a valid one
-	 * 
-	 * @param loc the location you are trying to determine as being valid or not
-	 * @param maxRows the maximum # of rows before the location is no longer valid
-	 * @param maxCols the maximum # of columns before the location is no longer valid
-	 * @return whether or not the location is valid
-	 */
+
+	 // This helper method is used by getLocation to ensure that location entered is a valid one
 	public static boolean isValidLocation(Space loc, int maxRows, int maxCols) {
 		if(loc == null) return false;
 		return loc.getRow() >= 0 && loc.getRow() < maxRows && loc.getCol() >= 0 && loc.getCol() < maxCols;
 	}
 
-	/**
-	 * This helper method is used by getLocation to convert a user string to a row column
-	 * 
-	 * @param location the string response given by the user to specify a location
-	 * @return a RowCol which has the row and column number
-	 */
+	 // This helper method is used by getLocation to convert a user string to a row column
 	public static Space convertStringToIntPair(String location) {
 		if(location == null || location.equals("") || location.length() != 2) return null;
 		location = location.toUpperCase();

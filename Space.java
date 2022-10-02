@@ -1,32 +1,20 @@
-/**
- * Simple class that represents a row and a column, with simple getters and setters for both
- * @author Osvaldo
- */
 
 public class Space {
-	//TODO Put your instance variables here
 	int row;
 	int col;
 	
-	/**
-	 * The constructor that will set up the object to store a row and column
-	 * 
-	 * @param row
-	 * @param col
-	 */
+	
+	 // The constructor that will set up the object to store a row and column
 	public Space(int row, int col) {
-		//TODO: this is the constructor, you'll need to fill this in
 		this.row = row;
 		this.col = col;
 	}
 	
 	public int getRow() {
-		//TODO fill in this getter
 		return row;
 	}
 	
 	public int getCol() {
-		//TODO fill this in
 		return col;
 	}
 	
